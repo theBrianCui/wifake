@@ -10,13 +10,13 @@ if len(ARGUMENTS) < MIN_ARGS:
     sys.exit(1)
 
 # ensure the network interface exists
-ifconfig = None
+iwconfig = None
 try:
-    ifconfig = subprocess.run(["ifconfig", ARGUMENTS[0]], stdout=subprocess.PIPE, check=True)
+    iwconfig = subprocess.run(["iwconfig", ARGUMENTS[0]], stdout=subprocess.PIPE, check=True)
 except:
-    print("Error: network interface \"{0}\" does not exist.".format(ARGUMENTS[0]))
+    print("Error: network interface \"{0}\" does not exist or is not wireless.".format(ARGUMENTS[0]))
     sys.exit(1)
 
-print_stdout(ifconfig)
+print_stdout(iwconfig)
 print("You did it!")
 
