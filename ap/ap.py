@@ -1,6 +1,6 @@
 import sys
 import subprocess
-from utils import print_stdout
+from utils import exec_sync, print_stdout
 
 MIN_ARGS = 1
 ARGUMENTS = sys.argv[1:]
@@ -13,23 +13,22 @@ if len(ARGUMENTS) < MIN_ARGS:
 INTERFACE = ARGUMENTS[0]
 
 # ensure the network interface exists, and is wireless
-print("Checking interface {0}... ".format(INTERFACE), end="", flush=True)
-iwconfig = None
-try:
-    iwconfig = subprocess.run(["iwconfig", INTERFACE], stdout=subprocess.PIPE, check=True)
-except:
-    print("Error: network interface \"{0}\" does not exist or is not wireless.".format(INTERFACE))
-    sys.exit(1)
-print("Done.")
+exec_sync(["iwconfig", INTERFACE],
+          "Checking interface {0}... ".format(INTERFACE),
+          "Error: network interface \"{0}\" does not exist or is not wireless.".format(INTERFACE),
+          "Done.")
 
 # airmon-ng check kill
-print("Executing `airmon-ng check kill`... ", end="", flush=True)
-try:
-    subprocess.run(["airmon-ng", "check", "kill"], stdout=subprocess.PIPE, check=True)
-except:
-    print("Error: failed to kill conflicting processes.")
-    sys.exit(1)
-print("Done.")
+exec_sync(["airmon-ng", "check", "kill"],
+          "Executing `airmon-ng check kill`... ",
+          "Error: failed to kill conflicting processes.",
+          "Done.")
+
+# establish local gateway at 10.0.0.1/24
+exec_sync(["ifconfig", INTERFACE, "10.0.0.1/24", "up"],
+          "Establishing local gateway for {0} at 10.0.0.1/24... ".format(INTERFACE),
+          "Error: failed to assign local gateway.",
+          "Done.")
 
 # print_stdout(iwconfig)
 print("You did it!")
