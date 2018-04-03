@@ -15,16 +15,16 @@ ssid_list = []
 
 # creates a list of the found access points
 def make_ssid_list():
-    csv_file  = open("test-01.csv", "r")
-    for line in csv_file:
-        if "ESSID" in line:
-            continue
-        separated_line = line.split(",")
-        if len(separated_line) >= ssid_index:
-            # skip blank lines
-            if len(separated_line[ssid_index]) <= 1:
+    with open("test-01.csv", "r") as csv_file:
+        for line in csv_file:
+            if "ESSID" in line:
                 continue
-            ssid_list.append(separated_line)
+            separated_line = line.split(",")
+            if len(separated_line) >= ssid_index:
+                # skip blank lines
+                if len(separated_line[ssid_index]) <= 1:
+                    continue
+                ssid_list.append(separated_line)
 
 
 # gets user choice input
@@ -44,7 +44,7 @@ def get_input(prompt, count):
 
 # choose an access_point from the list of found access points
 def choose_access_point():
-    print ("Here are the list of available access points")
+    print ("Here are the available access points")
     line_num = 1
     for line in ssid_list:
         print("{num}) {line}".format(num = line_num, line = line[ssid_index]))
@@ -63,11 +63,11 @@ def make_hostapd_conf(ap_ssid):
     # removes existing hostapd.conf
     if os.path.exists("hostapd.conf"):
         os.remove("hostapd.conf")
-    hostapd_conf = open("hostapd.conf", "w")
-    hostapd_conf.write("interface={intf_name}\n".format(intf_name = interface))
-    hostapd_conf.write("driver={drvr_name}\n".format(drvr_name = driver))
-    hostapd_conf.write("ssid={ssid}\n".format(ssid = ap_ssid))
-    hostapd_conf.write("channel={chan}\n".format(chan = channel))
+    with open("hostapd.conf", "w") as hostapd_conf:
+        hostapd_conf.write("interface={intf_name}\n".format(intf_name = interface))
+        hostapd_conf.write("driver={drvr_name}\n".format(drvr_name = driver))
+        hostapd_conf.write("ssid={ssid}\n".format(ssid = ap_ssid))
+        hostapd_conf.write("channel={chan}\n".format(chan = channel))
 
 
 # executes hostapd to spawn the access point
