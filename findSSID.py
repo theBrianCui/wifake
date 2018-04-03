@@ -5,8 +5,14 @@ import os
 
 
 #remove any previous runs
-os.remove('test-01.csv')
-
+if os.path.exists('test-01.csv'):
+    os.remove('test-01.csv')
+if os.path.exists('test-01.cap'):
+    os.remove('test-01.cap')
+if os.path.exists('test-01.kismet.netxml'):
+    os.remove('test-01.kismet.netxml')
+if os.path.exists('test-01.kismet.csv'):
+    os.remove('test-01.kismet.csv')
 
 #drop wlan into monitor mode
 call(['airmon-ng','start','wlan0'])

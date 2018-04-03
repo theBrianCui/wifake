@@ -103,3 +103,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# dnsmasq temp file
+ap/ap-dnsmasq.conf
+
+# findSSID temp files
+**/test-??.cap
+**/test-??.csv
+**/test-??.kismet.csv
+**/test-??.kismet.netxml
