@@ -30,6 +30,10 @@ exec_sync(["ifconfig", INTERFACE, "10.0.0.1/24", "up"],
           "Error: failed to assign local gateway.",
           "Done.")
 
+# setup dnsmasq
+exec_sync(["which", "dnsmasq"],
+          error="Error: dnsmasq is not installed. Install dnsmasq with `apt-get install dnsmasq`.")
+
 # print_stdout(iwconfig)
 print("You did it!")
 
