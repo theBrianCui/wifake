@@ -1,20 +1,15 @@
 import os
 
-
 # location of SSID in the string
 ssid_index = 13
 
 # metadata for hostapd.conf
-interface = "wlan0"
 driver = "nl80211"
-channel = 1
-
-# list of found access points
-ssid_list = []
-
+channel = 1 # TODO: also scan for channel number
 
 # creates a list of the found access points
 def make_ssid_list():
+    ssid_list = []
     with open("test-01.csv", "r") as csv_file:
         for line in csv_file:
             if "ESSID" in line:
@@ -25,7 +20,7 @@ def make_ssid_list():
                 if len(separated_line[ssid_index]) <= 1:
                     continue
                 ssid_list.append(separated_line)
-
+    return ssid_list
 
 # gets user choice input
 def get_input(prompt, count):
@@ -41,10 +36,12 @@ def get_input(prompt, count):
             print("That's not a valid choice. Please try again.")
     return choice
 
-
 # choose an access_point from the list of found access points
 def choose_access_point():
-    print ("Here are the available access points")
+    ssid_list = make_ssid_list()
+    
+    print("Access points found:")
+    print("====================")
     line_num = 1
     for line in ssid_list:
         print("{num}) {line}".format(num = line_num, line = line[ssid_index]))
@@ -53,13 +50,14 @@ def choose_access_point():
     print()
     choice = get_input("Which one would you like to mimic?\n", line_num-1)
     ap_ssid = ssid_list[choice-1][ssid_index]
-    print("Using access point: {ap}\n".format(ap = ap_ssid))
+
+    print("Selected access point: {ap}\n".format(ap = ap_ssid))
     return ap_ssid
 
 
 # updates hostapd.conf with the new access point
-def make_hostapd_conf(ap_ssid):
-    print ("Creating hostapd_conf for access point {ap}".format(ap = ap_ssid))
+def make_hostapd_conf(ap_ssid, interface):
+    print("Creating hostapd.conf for access point {ap}".format(ap = ap_ssid))
     # removes existing hostapd.conf
     if os.path.exists("hostapd.conf"):
         os.remove("hostapd.conf")
@@ -79,5 +77,5 @@ def execute_hostapd():
 if __name__ == "__main__":
     make_ssid_list()
     ap_ssid = choose_access_point()
-    make_hostapd_conf(ap_ssid)
+    make_hostapd_conf(ap_ssid, "wlan0")
     execute_hostapd()

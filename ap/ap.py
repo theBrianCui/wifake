@@ -1,6 +1,6 @@
 import sys
 import subprocess
-from utils import exec_sync, print_stdout
+from ../utils import exec_sync, print_stdout
 
 MIN_ARGS = 1
 ARGUMENTS = sys.argv[1:]
