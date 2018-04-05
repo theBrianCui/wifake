@@ -25,12 +25,15 @@ interface.verify_interface(INTERFACE)
 monitor.scan(INTERFACE)
 
 # Select an access point, then create a hostapd configuration
-target_ssid = ap.choose_access_point()
-ap.make_hostapd_conf(target_ssid, INTERFACE)
+target_id = ap.choose_access_point()
+ap.make_hostapd_conf(target_id, INTERFACE)
 
 # Set up local gateway and DNS
 interface.establish_gateway(INTERFACE)
 interface.establish_dns(INTERFACE)
+
+# Start hosting the access point
+ap.execute_hostapd(target_id)
 
 # print_stdout(iwconfig)
 print("You did it!")
