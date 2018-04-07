@@ -67,7 +67,7 @@ def deauth(ap_id,interface):
     #switch wireless card channel to target channel so aireplay will work
     exec_sync(['iwconfig', interface+'mon', 'channel', channel],
               "Switching channel of {0} to target channel... ".format(interface),
-              "Error: could not switch {0} to monitor mode using `airmon-ng start {0}`".format(interface),
+              "Error: could not switch {0} to target channel".format(interface),
               "Done.")
 
     #run aireplay attack
