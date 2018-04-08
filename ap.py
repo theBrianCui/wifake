@@ -131,6 +131,7 @@ def make_hostapd_conf(ap_id, interface):
         hostapd_conf.write("driver={drvr_name}\n".format(drvr_name = driver))
         hostapd_conf.write("ssid={ssid}\n".format(ssid = ap_ssid))
         hostapd_conf.write("channel={chan}\n".format(chan = ap_chan))
+        hostapd_conf.write("hw_mode=g\n")
 
         # for encryption configurations
         ap_priv = ap[priv_index].strip()
