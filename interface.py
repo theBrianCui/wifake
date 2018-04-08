@@ -16,6 +16,12 @@ def verify_interface(target_interface, wireless=True,
                   "Error: network interface \"{0}\" does not exist or is not wireless.".format(target_interface),
                   "Done.", silent=silent, err_silent=err_silent)
 
+def down_interface(target_interface):
+    exec_sync(["ifconfig", target_interface, "down"],
+              "Stopping interface {0}... ".format(target_interface),
+              "Error: could not down network interface {0}.".format(target_interface),
+              "Done.", die=False)
+
 def establish_gateway(target_interface):
     exec_sync(["ifconfig", target_interface, "10.0.0.1/24", "up"],
               "Establishing local gateway for {0} at 10.0.0.1/24... ".format(target_interface),

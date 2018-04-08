@@ -70,3 +70,4 @@ except KeyboardInterrupt:
     interface.stop_dns()
     interface.stop_forward(FW_INTERFACE)
     monitor.exit_monitor_mode(INTERFACE)
+    interface.down_interface(INTERFACE)
