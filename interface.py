@@ -2,14 +2,18 @@ from utils import exec_sync, print_stdout
 
 DNSMASQ_CONF = "dnsmasq.conf"
 
-def verify_interface(target_interface, msg=True, silent=True, err_silent=False):
+def verify_interface(target_interface, wireless=True,
+                     msg=True, silent=True, err_silent=False):
+    command = "ifconfig"
+    if wireless: command = "iwconfig"
+
     if not msg:
-        exec_sync(["iwconfig", target_interface], silent=silent, err_silent=err_silent)
+        exec_sync([command, target_interface], silent=silent, err_silent=err_silent)
     else:
         # ensure the network target_interface exists, and is wireless
-        exec_sync(["iwconfig", target_interface],
-                  "Checking target_interface {0}... ".format(target_interface),
-                  "Error: network target_interface \"{0}\" does not exist or is not wireless.".format(target_interface),
+        exec_sync([command, target_interface],
+                  "Checking interface {0}... ".format(target_interface),
+                  "Error: network interface \"{0}\" does not exist or is not wireless.".format(target_interface),
                   "Done.", silent=silent, err_silent=err_silent)
 
 def establish_gateway(target_interface):
@@ -17,6 +21,31 @@ def establish_gateway(target_interface):
               "Establishing local gateway for {0} at 10.0.0.1/24... ".format(target_interface),
               "Error: failed to assign local gateway.",
               "Done.")
+
+def establish_forward(forward_interface):
+    # sysctl -w net.ipv4.ip_forward=1
+    exec_sync(["sysctl", "-w", "net.ipv4.ip_forward=1"],
+              "Enabling IPv4 network forwarding in `sysctl`... ",
+              "Error: failed to enable network forwarding with `sysctl -w net.ipv4.ip_forward=1`.",
+              "Done.")
+
+    # iptables -P FORWARD ACCEPT
+    exec_sync(["iptables", "-P", "FORWARD", "ACCEPT"],
+              "Enabling network forwarding in `iptables`... ",
+              "Error: failed to enable network forwarding with `iptables -P FORWARD ACCEPT`.",
+              "Done.")
+
+    # iptables --table nat -A POSTROUTING -o wlan0 -j MASQUERADE
+    exec_sync(["iptables", "--table", "nat", "-A", "POSTROUTING", "-o", forward_interface, "-j", "MASQUERADE"],
+              "Enabling routing to interface {0} in `iptables`... ".format(forward_interface),
+              "Error: failed to enable routing for interface {0} with `iptables --table nat -A POSTROUTING -o {0} -j MASQUERADE`.".format(forward_interface),
+              "Done.")
+
+def stop_forward(forward_interface):
+    exec_sync(["iptables", "--table", "nat", "-A", "POSTROUTING", "-o", forward_interface, "-j", "MASQUERADE"],
+              "Disabling routing to interface {0} in `iptables`... ".format(forward_interface),
+              "Error: failed to disable routing for interface {0} with `iptables --table nat -A POSTROUTING -o {0} -j MASQUERADE`.".format(forward_interface),
+              "Done.", die=False)
 
 def get_dnsmasq_pid():
     pid = exec_sync(["pgrep", "dnsmasq"],

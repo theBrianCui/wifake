@@ -13,10 +13,13 @@ ARGUMENTS = sys.argv[1:]
 
 # check arguments
 if len(ARGUMENTS) < MIN_ARGS:
-    print("Usage: python3 main.py interface")
+    print("Usage: python3 main.py INTERFACE [--forward=FW_INTERFACE]")
     sys.exit(1)
     
 INTERFACE = ARGUMENTS[0]
+FW_INTERFACE = None
+if len(ARGUMENTS) > 1:
+    FW_INTERFACE = ARGUMENTS[1].split("--forward=")[-1]
 
 logo = """
  __      __.__  _____        __           
@@ -29,8 +32,10 @@ logo = """
 print(logo)
 
 try:
-    # Ensure the interface exists and is wireless
-    interface.verify_interface(INTERFACE)
+    # Ensure the interfaces exists and is wireless
+    interface.verify_interface(INTERFACE, wireless=True)
+    if FW_INTERFACE != None:
+        interface.verify_interface(FW_INTERFACE, wireless=False)
 
     # Scan for nearby access points
     monitor.scan(INTERFACE)
@@ -42,6 +47,10 @@ try:
     # Set up local gateway and DNS
     interface.establish_gateway(INTERFACE)
     interface.establish_dns(INTERFACE)
+
+    # Set up forwarding
+    if FW_INTERFACE != None:
+        interface.establish_forward(FW_INTERFACE)
 
     # Start hosting the access point
     ap.execute_hostapd(target_id)
@@ -59,4 +68,5 @@ except KeyboardInterrupt:
     print("")
     print("! KeyboardInterrupt detected. Exiting...")
     interface.stop_dns()
+    interface.stop_forward(FW_INTERFACE)
     monitor.exit_monitor_mode(INTERFACE)
