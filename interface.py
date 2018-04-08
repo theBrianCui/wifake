@@ -68,5 +68,6 @@ def establish_dns(target_interface):
           end="", flush=True)
     with open(DNSMASQ_CONF, "w") as dnsmasq_conf_file:
         dnsmasq_conf_file.write(dnsmasq_conf)
+    print("Done.")
 
     start_dns()
