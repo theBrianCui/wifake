@@ -68,6 +68,7 @@ except KeyboardInterrupt:
     print("")
     print("! KeyboardInterrupt detected. Exiting...")
     interface.stop_dns()
-    interface.stop_forward(FW_INTERFACE)
+    if FW_INTERFACE != None:
+        interface.stop_forward(FW_INTERFACE)
     monitor.exit_monitor_mode(INTERFACE)
     interface.down_interface(INTERFACE)
