@@ -2,12 +2,15 @@ from utils import exec_sync, print_stdout
 
 DNSMASQ_CONF = "dnsmasq.conf"
 
-def verify_interface(interface):
-    # ensure the network interface exists, and is wireless
-    exec_sync(["iwconfig", interface],
-              "Checking interface {0}... ".format(interface),
-              "Error: network interface \"{0}\" does not exist or is not wireless.".format(interface),
-              "Done.")
+def verify_interface(interface, silent=True, err_silent=False):
+    if silent:
+        exec_sync(["iwconfig", interface], silent=silent, err_silent=err_silent)
+    else:
+        # ensure the network interface exists, and is wireless
+        exec_sync(["iwconfig", interface],
+                  "Checking interface {0}... ".format(interface),
+                  "Error: network interface \"{0}\" does not exist or is not wireless.".format(interface),
+                  "Done.", silent=silent, err_silent=err_silent)
 
 def establish_gateway(interface):
     exec_sync(["ifconfig", interface, "10.0.0.1/24", "up"],

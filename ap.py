@@ -43,10 +43,8 @@ def get_input(prompt, count):
             print("\nThat's not a valid choice. Please try again.")
     return choice
 
-# sends deauth packets to chosen access_point
+# sends broadcast deauth packets to chosen access_point
 def deauth(ap_id,interface):
-
-
     ap = ssid_list[ap_id-1]
     ap_ssid = ap[ssid_index].strip()
     mac = ap[bssid_index].strip()

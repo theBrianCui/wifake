@@ -15,31 +15,44 @@ ARGUMENTS = sys.argv[1:]
 if len(ARGUMENTS) < MIN_ARGS:
     print("Usage: python3 main.py interface")
     sys.exit(1)
-
+    
 INTERFACE = ARGUMENTS[0]
 
-# Ensure the interface exists and is wireless
-interface.verify_interface(INTERFACE)
+logo = """
+ __      __.__  _____        __           
+/  \    /  \__|/ ____\____  |  | __ ____  
+\   \/\/   /  \   __\\\\__  \ |  |/ // __ \ 
+ \        /|  ||  |   / __ \|    <\  ___/ 
+  \__/\  / |__||__|  (____  /__|_ \\\\___  >
+       \/                 \/     \/    \/ 
+"""
+print(logo)
 
-# Scan for nearby access points
-monitor.scan(INTERFACE)
+try:
+    # Ensure the interface exists and is wireless
+    interface.verify_interface(INTERFACE)
 
-# Select an access point, then create a hostapd configuration
-target_id = ap.choose_access_point()
-ap.make_hostapd_conf(target_id, INTERFACE)
+    # Scan for nearby access points
+    monitor.scan(INTERFACE)
 
+    # Select an access point, then create a hostapd configuration
+    target_id = ap.choose_access_point()
+    ap.make_hostapd_conf(target_id, INTERFACE)
 
-# Set up local gateway and DNS
-interface.establish_gateway(INTERFACE)
-interface.establish_dns(INTERFACE)
+    # Set up local gateway and DNS
+    interface.establish_gateway(INTERFACE)
+    interface.establish_dns(INTERFACE)
 
-# Start hosting the access point
-ap.execute_hostapd(target_id)
+    # Start hosting the access point
+    ap.execute_hostapd(target_id)
 
-# Deauth clients on target network
-ap.deauth(target_id, INTERFACE)
+    # Deauth clients on target network
+    # Disabled for now, may interfere with hostapd
+    # ap.deauth(target_id, INTERFACE)
 
-# print_stdout(iwconfig)
-print("You did it!")
+    # print_stdout(iwconfig)
+    print("You did it!")
 
-
+# Clean up after requesting exit (Ctrl+C)
+except KeyboardInterrupt:
+    monitor.exit_monitor_mode(INTERFACE)
