@@ -80,9 +80,6 @@ def deauth(ap_id,interface):
               "Error: could not stop {0} monitor mode using `airmon-ng stop {0}`".format(interface  + "mon"),
               "Done.")
 
-
-
-
 # choose an access_point from the list of found access points
 def choose_access_point():
     make_ssid_list()
@@ -100,9 +97,10 @@ def choose_access_point():
     ap = ssid_list[choice-1]
     ap_ssid = ap[ssid_index]
     print("\nSelected access point: {ap}\n".format(ap = ap_ssid))
+    ap_priv = ap[priv_index].strip()
 
     # set up the password if there is one
-    if ap[priv_index] != "OPN":
+    if ap_priv != "OPN":
         print("This network appears to be encrypted.")
         while True:
             ap_pass = input("Enter the password for the access point.\n")
@@ -121,21 +119,25 @@ def make_hostapd_conf(ap_id, interface):
     ap = ssid_list[ap_id-1]
     ap_ssid = ap[ssid_index].strip()
     ap_chan = ap[chan_index].strip()
-    print("Creating hostapd.conf for access point {ap}".format(ap = ap_ssid))
+    print("Creating hostapd.conf for access point {ap}...".format(ap = ap_ssid), end="")
+
     # removes existing hostapd.conf
     if os.path.exists("hostapd.conf"):
         os.remove("hostapd.conf")
+
     with open("hostapd.conf", "w") as hostapd_conf:
         hostapd_conf.write("#basic configurations\n")
         hostapd_conf.write("interface={intf_name}\n".format(intf_name = interface))
         hostapd_conf.write("driver={drvr_name}\n".format(drvr_name = driver))
         hostapd_conf.write("ssid={ssid}\n".format(ssid = ap_ssid))
         hostapd_conf.write("channel={chan}\n".format(chan = ap_chan))
+
         # for encryption configurations
+        ap_priv = ap[priv_index].strip()
         if ap[priv_index] != "OPN":
             hostapd_conf.write("\n#WPA configurations\n")
             # set privacy flag; doesn't support WEP
-            ap_priv = ap[priv_index].strip()
+
             if ap_priv == "WPA":
                 hostapd_conf.write("wpa=1\n")
             elif ap_priv == "WPA2":
@@ -151,6 +153,7 @@ def make_hostapd_conf(ap_id, interface):
                 hostapd_conf.write("wpa_pairwise=TKIP\n")
             if "WPA2" in ap_priv:
                 hostapd_conf.write("rsn_pairwise=CCMP\n")
+    print("Done.")
 
 # executes hostapd to spawn the access point
 def execute_hostapd(ap_id):
