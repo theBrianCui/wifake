@@ -160,7 +160,7 @@ def execute_hostapd(ap_id):
     exec_sync(['hostapd', './hostapd.conf'],
               "Hosting access point...",
               "\nError: hostapd shutdown unexpectedly",
-              "Done")
+              "Done", silent=False)
 
 if __name__ == "__main__":
     make_ssid_list()
