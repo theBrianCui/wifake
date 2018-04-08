@@ -134,7 +134,7 @@ def make_hostapd_conf(ap_id, interface):
 
         # for encryption configurations
         ap_priv = ap[priv_index].strip()
-        if ap[priv_index] != "OPN":
+        if ap_priv != "OPN":
             hostapd_conf.write("\n#WPA configurations\n")
             # set privacy flag; doesn't support WEP
 

@@ -56,6 +56,7 @@ try:
 # Clean up after requesting exit (Ctrl+C)
 except KeyboardInterrupt:
     print("")
-    print("KeyboardInterrupt detected. Exiting...")
+    print("")
+    print("! KeyboardInterrupt detected. Exiting...")
     interface.stop_dns()
     monitor.exit_monitor_mode(INTERFACE)
