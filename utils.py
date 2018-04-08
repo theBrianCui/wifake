@@ -26,4 +26,5 @@ def exec_sync(command, before="", error="", after="",
             raise RuntimeError(error)
 
     if after != "": print(after)
-    return process.stdout
+    if process != None: return process.stdout
+    return ""

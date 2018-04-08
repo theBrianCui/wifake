@@ -21,7 +21,7 @@ if os.path.exists('test-01.kismet.csv'):
 def check_monitor_mode(target_interface):
     try:
         interface.verify_interface(target_interface + "mon",
-                                   silent=True, err_silent=True)
+                                   msg=False, silent=True, err_silent=True)
         return True
     except Exception as e:
         return False
