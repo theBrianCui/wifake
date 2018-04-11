@@ -16,6 +16,12 @@ def verify_interface(target_interface, wireless=True,
                   "Error: network interface \"{0}\" does not exist or is not wireless.".format(target_interface),
                   "Done.", silent=silent, err_silent=err_silent)
 
+def up_interface(target_interface):
+    exec_sync(["ifconfig", target_interface, "up"],
+              "Starting interface {0}...".format(target_interface),
+              "Error: could not up network interface {0}.".format(target_interface),
+              "Done.")
+
 def down_interface(target_interface):
     exec_sync(["ifconfig", target_interface, "down"],
               "Stopping interface {0}... ".format(target_interface),

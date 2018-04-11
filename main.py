@@ -53,7 +53,8 @@ try:
         interface.establish_forward(FW_INTERFACE)
 
     # Start hosting the access point
-    ap.execute_hostapd(target_id)
+    ap.clone_mac(target_id, INTERFACE)
+    ap.execute_hostapd()
 
     # Deauth clients on target network
     # Disabled for now, may interfere with hostapd
