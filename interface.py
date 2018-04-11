@@ -1,4 +1,5 @@
 from utils import exec_sync, print_stdout
+import subprocess
 
 DNSMASQ_CONF = "dnsmasq.conf"
 
@@ -74,11 +75,13 @@ def start_dns():
     # stop dnsmasq if already running
     stop_dns()
 
+    command = ["dnsmasq", "-C", DNSMASQ_CONF, "-d"]
     # start dnsmasq, then print its PID
-    exec_sync(["dnsmasq", "-C", DNSMASQ_CONF],
-              "Starting dnsmasq using configuration {0}... ".format(DNSMASQ_CONF),
-              "Error: could not start dnsmasq with configuration {0}.\n".format(DNSMASQ_CONF) + "Check if dnsmasq is already running.",
-              "Done.")
+    #exec_sync(command,
+    #          "Starting dnsmasq using configuration {0}... ".format(DNSMASQ_CONF),
+    #          "Error: could not start dnsmasq with configuration {0}.\n".format(DNSMASQ_CONF) + "Check if dnsmasq is already running.",
+    #          "Done.")
+    subprocess.Popen(command)
 
 def stop_dns():
     dnsmasq_exists_pid = get_dnsmasq_pid()
@@ -89,21 +92,27 @@ def stop_dns():
                   "Error: could not kill dnsmasq process with PID {0}.".format(dnsmasq_exists_pid),
                   "Done.")
 
-def establish_dns(target_interface):
+def establish_dns(target_interface, hosts=None):
     # setup dnsmasq
     # make sure dnsmasq is installed
     exec_sync(["which", "dnsmasq"],
               error="Error: dnsmasq is not installed. Install dnsmasq with `apt-get install dnsmasq`.")
 
-    dnsmasq_conf = "\n".join((
+    dnsmasq_conf = ""
+    options = [
         "interface={0}".format(target_interface),
         "dhcp-range=10.0.0.10,10.0.0.250,12h",
         "dhcp-option=3,10.0.0.1", # gateway
         "dhcp-option=6,10.0.0.1", # DNS server (this machine)
         "server=8.8.8.8", # upstream DNS server (Google DNS)
+        "no-hosts",
         "log-queries",
-        "log-dhcp",
-        ""))
+        "log-dhcp"]
+    if hosts != None:
+        options += ["addn-hosts={0}".format(hosts)]
+
+    options += [""]
+    dnsmasq_conf = "\n".join(options)
 
     print("Creating {0} file for {1}... ".format(DNSMASQ_CONF, target_interface),
           end="", flush=True)

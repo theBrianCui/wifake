@@ -13,13 +13,17 @@ ARGUMENTS = sys.argv[1:]
 
 # check arguments
 if len(ARGUMENTS) < MIN_ARGS:
-    print("Usage: python3 main.py INTERFACE [--forward=FW_INTERFACE]")
+    print("Usage: python3 main.py INTERFACE [--forward=FW_INTERFACE] [--hosts=HOSTS]")
     sys.exit(1)
     
 INTERFACE = ARGUMENTS[0]
 FW_INTERFACE = None
-if len(ARGUMENTS) > 1:
-    FW_INTERFACE = ARGUMENTS[1].split("--forward=")[-1]
+HOSTS = None
+for arg in ARGUMENTS[1:]:
+    if arg.find("--forward=") == 0:
+        FW_INTERFACE = arg.split("--forward=")[-1]
+    elif arg.find("--hosts=") == 0:
+        HOSTS = arg.split("--hosts=")[-1]
 
 logo = """
  __      __.__  _____        __           
@@ -46,7 +50,7 @@ try:
 
     # Set up local gateway and DNS
     interface.establish_gateway(INTERFACE)
-    interface.establish_dns(INTERFACE)
+    interface.establish_dns(INTERFACE, HOSTS)
 
     # Set up forwarding
     if FW_INTERFACE != None:
