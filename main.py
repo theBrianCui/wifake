@@ -53,7 +53,8 @@ try:
         interface.establish_forward(FW_INTERFACE)
 
     # Start hosting the access point
-    ap.execute_hostapd(target_id)
+    #ap.clone_mac(target_id, INTERFACE)
+    ap.execute_hostapd()
 
     # Deauth clients on target network
     # Disabled for now, may interfere with hostapd
@@ -64,11 +65,18 @@ try:
 
 # Clean up after requesting exit (Ctrl+C)
 except KeyboardInterrupt:
-    print("")
-    print("")
-    print("! KeyboardInterrupt detected. Exiting...")
-    interface.stop_dns()
-    if FW_INTERFACE != None:
-        interface.stop_forward(FW_INTERFACE)
-    monitor.exit_monitor_mode(INTERFACE)
-    interface.down_interface(INTERFACE)
+    clean_up = False
+    while (not clean_up):
+        try:
+            print("")
+            print("")
+            print("! KeyboardInterrupt detected. Exiting...")
+            interface.stop_dns()
+            if FW_INTERFACE != None:
+                interface.stop_forward(FW_INTERFACE)
+            monitor.exit_monitor_mode(INTERFACE)
+            interface.down_interface(INTERFACE)
+            #ap.reset_mac(INTERFACE)
+            clean_up = True
+        except KeyboardInterrupt:
+            pass

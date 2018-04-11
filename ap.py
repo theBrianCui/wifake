@@ -1,4 +1,5 @@
 from utils import exec_sync
+from interface import down_interface, up_interface
 import os
 
 # location of various fields in each line of csv file
@@ -138,7 +139,6 @@ def make_hostapd_conf(ap_id, interface):
         if ap_priv != "OPN":
             hostapd_conf.write("\n#WPA configurations\n")
             # set privacy flag; doesn't support WEP
-
             if ap_priv == "WPA":
                 hostapd_conf.write("wpa=1\n")
             elif ap_priv == "WPA2":
@@ -156,15 +156,35 @@ def make_hostapd_conf(ap_id, interface):
                 hostapd_conf.write("rsn_pairwise=CCMP\n")
     print("Done.")
 
+# change MAC address to match AP's host
+def clone_mac(ap_id, interface):
+    ap = ssid_list[ap_id-1]
+    mac = ap[bssid_index].strip()
+    # can't change MAC with interface up
+    down_interface(interface)
+    exec_sync(["macchanger", "-m", mac, interface],
+              "Cloning MAC address...\n",
+              "\nError: could not change MAC address for interface {intf}".format(intf = interface),
+              "Done", silent=False)
+    up_interface(interface)
+
 # executes hostapd to spawn the access point
-def execute_hostapd(ap_id):
+def execute_hostapd():
     exec_sync(['hostapd', './hostapd.conf'],
               "Hosting access point...",
               "\nError: hostapd shutdown unexpectedly",
               "Done", silent=False)
 
+# returns MAC to normal
+def reset_mac(interface):
+    exec_sync(["macchanger", "--permanent", interface],
+              "Resetting MAC address...\n",
+              "\nError: could not change MAC address for interface {intf}".format(intf = interface),
+              "Done", silent = False)
+
 if __name__ == "__main__":
     make_ssid_list()
     ap_id = choose_access_point()
     make_hostapd_conf(ap_id, "wlan0")
-    execute_hostapd(ap_id)
+    clone_mac(ap_id, "wlan0")
+    execute_hostapd()
