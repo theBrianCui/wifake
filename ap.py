@@ -165,8 +165,7 @@ def clone_mac(ap_id, interface):
     exec_sync(["macchanger", "-m", mac, interface],
               "Cloning MAC address...\n",
               "\nError: could not change MAC address for interface {intf}".format(intf = interface),
-              "Done",
-              silent=False)
+              "Done", silent=False)
     up_interface(interface)
 
 # executes hostapd to spawn the access point
@@ -175,6 +174,13 @@ def execute_hostapd():
               "Hosting access point...",
               "\nError: hostapd shutdown unexpectedly",
               "Done", silent=False)
+
+# returns MAC to normal
+def reset_mac(interface):
+    exec_sync(["macchanger", "--permanent", interface],
+              "Resetting MAC address...\n",
+              "\nError: could not change MAC address for interface {intf}".format(intf = interface),
+              "Done", silent = False)
 
 if __name__ == "__main__":
     make_ssid_list()

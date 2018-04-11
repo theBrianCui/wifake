@@ -53,7 +53,7 @@ try:
         interface.establish_forward(FW_INTERFACE)
 
     # Start hosting the access point
-    ap.clone_mac(target_id, INTERFACE)
+    #ap.clone_mac(target_id, INTERFACE)
     ap.execute_hostapd()
 
     # Deauth clients on target network
@@ -73,3 +73,4 @@ except KeyboardInterrupt:
         interface.stop_forward(FW_INTERFACE)
     monitor.exit_monitor_mode(INTERFACE)
     interface.down_interface(INTERFACE)
+    #ap.reset_mac(INTERFACE)
