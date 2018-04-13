@@ -1,0 +1,224 @@
+Uri: https://mycampusnet.com/
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\index.html
+Content Type: text/html
+
+Uri: https://mycampusnet.com/public/css/global.css
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\css\global.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/images/favicon_green.ico
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\favicon_green.ico
+Content Type: image/vnd.microsoft.icon
+
+Uri: https://mycampusnet.com/public/css/home.css
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\css\home.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/js/components/require.js
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\js\components\require.js
+Content Type: text/javascript
+
+Uri: https://mycampusnet.com/public/images/logo_2.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\logo_2.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/signup
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\signup.html
+Content Type: text/html
+
+Uri: https://mycampusnet.com/forgot-login
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\forgot-login.html
+Content Type: text/html
+
+Uri: http://fonts.googleapis.com/css?family=Roboto:400,500,300,700
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\css.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/images/icons/radio_empty.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_empty.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/radio_empty.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_empty.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/radio_full.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_full.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/radio_full.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_full.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/check_empty.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_empty.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/check_empty.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_empty.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/check_full.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_full.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/check_full.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_full.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/radio_empty_small.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_empty_small.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/radio_empty_small.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_empty_small.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/radio_full_small.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_full_small.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/radio_full_small.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\radio_full_small.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/check_empty_small.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_empty_small.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/check_empty_small.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_empty_small.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/check_full_small.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_full_small.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/check_full_small.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\check_full_small.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/fancybox_sprite.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\fancybox_sprite.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/fancybox_sprite@2x.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\fancybox_sprite@2x.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/calendar.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\calendar.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/checkmark.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\checkmark.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/input_one.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\input_one.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/select-arrow.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\select-arrow.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/select-arrow-green.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\select-arrow-green.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/hamburger.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\hamburger.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/hamburger.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\hamburger.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/pdf.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\pdf.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/pdf.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\pdf.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/bubble.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\bubble.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/bubble.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\bubble.svg
+Content Type: image/svg+xml
+
+Uri: http://fonts.googleapis.com/css?family=Roboto:400,500,300,700);*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}html,body{font-size:16px}body{background:
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\css-1.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/css/signup.css
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\css\signup.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/css/forgotlogin.css
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\css\forgotlogin.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/files/Setup_Guide_MyCampusNet.pdf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\files\Setup_Guide_MyCampusNet.pdf
+Content Type: application/pdf
+
+Uri: https://mycampusnet.com/support
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\support.html
+Content Type: text/html
+
+Uri: http://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmSU5fBBc9.ttf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\s\roboto\v18\KFOlCnqEu92Fr1MmSU5fBBc9.ttf
+Content Type: font/ttf
+
+Uri: http://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\s\roboto\v18\KFOmCnqEu92Fr1Mu4mxP.ttf
+Content Type: font/ttf
+
+Uri: http://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmEU9fBBc9.ttf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\s\roboto\v18\KFOlCnqEu92Fr1MmEU9fBBc9.ttf
+Content Type: font/ttf
+
+Uri: http://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmWUlfBBc9.ttf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\s\roboto\v18\KFOlCnqEu92Fr1MmWUlfBBc9.ttf
+Content Type: font/ttf
+
+Uri: https://mycampusnet.com/public/css/support.css
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\css\support.css
+Content Type: text/css
+
+Uri: https://mycampusnet.com/public/images/icons/download.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\download.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/download.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\download.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/images/icons/chat.png
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\chat.png
+Content Type: image/png
+
+Uri: https://mycampusnet.com/public/images/icons/chat.svg
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\images\icons\chat.svg
+Content Type: image/svg+xml
+
+Uri: https://mycampusnet.com/public/files/printer_setup.pdf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\files\printer_setup.pdf
+Content Type: application/pdf
+
+Uri: https://mycampusnet.com/public/files/CC_EUA.pdf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\files\CC_EUA.pdf
+Content Type: application/pdf
+
+Uri: https://mycampusnet.com/public/files/digital_tv_faq.pdf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\files\digital_tv_faq.pdf
+Content Type: application/pdf
+
+Uri: https://mycampusnet.com/public/files/Privacy_Policy.pdf
+File Name: C:\Users\brian\Desktop\New folder\mycampusnet.com\public\files\Privacy_Policy.pdf
+Content Type: application/pdf
+
