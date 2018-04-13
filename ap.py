@@ -118,42 +118,47 @@ def choose_access_point():
 # updates hostapd.conf with the new access point
 def make_hostapd_conf(ap_id, interface):
     ap = ssid_list[ap_id-1]
-    ap_ssid = ap[ssid_index].strip()
-    ap_chan = ap[chan_index].strip()
-    print("Creating hostapd.conf for access point {ap}...".format(ap = ap_ssid), end="")
+    ssid = ap[ssid_index].strip()
+    channel = ap[chan_index].strip()
+    print("Creating hostapd.conf for access point {0}...".format(ssid), end="")
 
     # removes existing hostapd.conf
     if os.path.exists("hostapd.conf"):
         os.remove("hostapd.conf")
 
-    with open("hostapd.conf", "w") as hostapd_conf:
-        hostapd_conf.write("#basic configurations\n")
-        hostapd_conf.write("interface={intf_name}\n".format(intf_name = interface))
-        hostapd_conf.write("driver={drvr_name}\n".format(drvr_name = driver))
-        hostapd_conf.write("ssid={ssid}\n".format(ssid = ap_ssid))
-        hostapd_conf.write("channel={chan}\n".format(chan = ap_chan))
-        hostapd_conf.write("hw_mode=g\n")
+    hostapd_conf = ""
+    options = [
+        "interface={0}".format(interface),
+        "driver={0}".format(driver),
+        "ssid={0}".format(ssid),
+        "channel={0}".format(channel),
+        "hw_mode=g"]
 
-        # for encryption configurations
-        ap_priv = ap[priv_index].strip()
-        if ap_priv != "OPN":
-            hostapd_conf.write("\n#WPA configurations\n")
-            # set privacy flag; doesn't support WEP
-            if ap_priv == "WPA":
-                hostapd_conf.write("wpa=1\n")
-            elif ap_priv == "WPA2":
-                hostapd_conf.write("wpa=2\n")
-            else:
-                hostapd_conf.write("wpa=3\n")
-            hostapd_conf.write("wpa_passphrase={pwd}\n".format(pwd = ap[len(ap)-1]))
-            hostapd_conf.write("wpa_key_mgmt=WPA-PSK\n")
-            # set authentication protocols; only supports TKIP and CCMP
-            if ap_priv == "WPA" or ap_priv == "WPA2 WPA" and ap[ciph_index].strip() == "CCMP": 
-                hostapd_conf.write("wpa_pairwise=CCMP\n")
-            elif ap_priv == "WPA" or ap_priv == "WPA2 WPA":
-                hostapd_conf.write("wpa_pairwise=TKIP\n")
-            if "WPA2" in ap_priv:
-                hostapd_conf.write("rsn_pairwise=CCMP\n")
+    # for encryption configurations
+    ap_priv = ap[priv_index].strip()
+    passphrase = ap[len(ap)-1]
+    if ap_priv != "OPN":
+        # set privacy flag; doesn't support WEP
+        if ap_priv == "WPA":
+            options += ["wpa=1"]
+        elif ap_priv == "WPA2":
+            options += ["wpa=2"]
+        else:
+            options += ["wpa=3"]
+        options += ["wpa_passphrase={0}".format(passphrase)]
+        options += ["wpa_key_mgmt=WPA-PSK"]
+        # set authentication protocols; only supports TKIP and CCMP
+        if ap_priv == "WPA" or ap_priv == "WPA2 WPA" and ap[ciph_index].strip() == "CCMP": 
+                options += ["wpa_pairwise=CCMP"]
+        elif ap_priv == "WPA" or ap_priv == "WPA2 WPA":
+                options  += ["wpa_pairwise=TKIP"]
+        if "WPA2" in ap_priv:
+                options += ["rsn_pairwise=CCMP"]
+    options += [""]
+    hostapd_conf = "\n".join(options)
+
+    with open("hostapd.conf", "w") as hostapd_conf_file:
+        hostapd_conf_file.write(hostapd_conf)
     print("Done.")
 
 # change MAC address to match AP's host
