@@ -174,8 +174,11 @@ def clone_mac(ap_id, interface):
     up_interface(interface)
 
 # executes hostapd to spawn the access point
-def execute_hostapd():
-    exec_sync(['hostapd', './hostapd.conf'],
+def execute_hostapd(conf):
+    if not conf:
+        conf = './hostapd.conf'
+
+    exec_sync(['hostapd', conf],
               "Hosting access point...",
               "\nError: hostapd shutdown unexpectedly",
               "Done", silent=False)

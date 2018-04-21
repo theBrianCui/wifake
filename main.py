@@ -14,16 +14,20 @@ ARGUMENTS = sys.argv[1:]
 # check arguments
 if len(ARGUMENTS) < MIN_ARGS:
     print("Usage: python3 main.py INTERFACE [--forward=FW_INTERFACE] [--hosts=HOSTS]")
+    print("[--apconf=HOSTAPD_CONF]")
     sys.exit(1)
     
 INTERFACE = ARGUMENTS[0]
 FW_INTERFACE = None
 HOSTS = None
+AP_CONF = None
 for arg in ARGUMENTS[1:]:
     if arg.find("--forward=") == 0:
         FW_INTERFACE = arg.split("--forward=")[-1]
     elif arg.find("--hosts=") == 0:
         HOSTS = arg.split("--hosts=")[-1]
+    elif arg.find("--apconf=") == 0:
+        AP_CONF = arg.split("--apconf=")[-1]
 
 logo = """
  __      __.__  _____        __           
@@ -41,12 +45,13 @@ try:
     if FW_INTERFACE != None:
         interface.verify_interface(FW_INTERFACE, wireless=False)
 
-    # Scan for nearby access points
-    monitor.scan(INTERFACE)
+    if AP_CONF == None:
+        # Scan for nearby access points
+        monitor.scan(INTERFACE)
 
-    # Select an access point, then create a hostapd configuration
-    target_id = ap.choose_access_point()
-    ap.make_hostapd_conf(target_id, INTERFACE)
+        # Select an access point, then create a hostapd configuration
+        target_id = ap.choose_access_point()
+        ap.make_hostapd_conf(target_id, INTERFACE)
 
     # Set up local gateway and DNS
     interface.establish_gateway(INTERFACE)
@@ -58,7 +63,7 @@ try:
 
     # Start hosting the access point
     #ap.clone_mac(target_id, INTERFACE)
-    ap.execute_hostapd()
+    ap.execute_hostapd(AP_CONF)
 
     # Deauth clients on target network
     # Disabled for now, may interfere with hostapd
