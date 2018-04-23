@@ -13,8 +13,8 @@ ARGUMENTS = sys.argv[1:]
 
 # check arguments
 if len(ARGUMENTS) < MIN_ARGS:
-    print("Usage: python3 main.py INTERFACE [--forward=FW_INTERFACE] [--hosts=HOSTS]")
-    print("[--apconf=HOSTAPD_CONF]")
+    print("Usage: python3 main.py <INTERFACE> [--forward=FW_INTERFACE] [--hosts=HOSTS]")
+    print("                                   [--apconf=HOSTAPD_CONF]")
     sys.exit(1)
     
 INTERFACE = ARGUMENTS[0]
