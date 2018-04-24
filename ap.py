@@ -1,5 +1,5 @@
 from utils import exec_sync
-from interface import down_interface, up_interface
+from interface import down_interface, up_interface, check_kill
 import os
 
 # location of various fields in each line of csv file
@@ -52,11 +52,8 @@ def deauth(ap_id,interface):
     channel = ap[chan_index].strip()
 
     # airmon-ng check kill
-    exec_sync(["airmon-ng", "check", "kill"],
-              "Executing `airmon-ng check kill`... ",
-              "Error: failed to kill conflicting processes.",
-              "Done.")
-    
+    check_kill()
+
     #start airmon-ng
     exec_sync(['airmon-ng', 'start', interface],
               "Switching {0} to monitor mode... ".format(interface),

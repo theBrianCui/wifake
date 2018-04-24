@@ -121,3 +121,9 @@ def establish_dns(target_interface, hosts=None):
     print("Done.")
 
     start_dns()
+
+def check_kill():
+    exec_sync(["airmon-ng", "check", "kill"],
+              "Executing `airmon-ng check kill`... ",
+              "Error: failed to kill conflicting processes.",
+              "Done.")

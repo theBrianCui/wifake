@@ -47,12 +47,6 @@ def exit_monitor_mode(target_interface):
                   "Done.")
 
 def scan(target_interface):
-    # airmon-ng check kill
-    exec_sync(["airmon-ng", "check", "kill"],
-              "Executing `airmon-ng check kill`... ",
-              "Error: failed to kill conflicting processes.",
-              "Done.")
-    
     enter_monitor_mode(target_interface)
 
     #run airodump

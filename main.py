@@ -45,6 +45,7 @@ try:
     if FW_INTERFACE != None:
         interface.verify_interface(FW_INTERFACE, wireless=False)
 
+    interface.check_kill()
     if AP_CONF == None:
         # Scan for nearby access points
         monitor.scan(INTERFACE)
